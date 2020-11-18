@@ -72,6 +72,13 @@ namespace Csharp
             d2.AddAfter(d3);
             d3.AddAfter(d4);
             d4.AddAfter(d5);
+            //
+
+            IList<DoubleLinked<object> >lists = new List<DoubleLinked<object>>() { d1, d2, d3, d4, d5 };
+            foreach (var item in lists)
+            {
+                Console.WriteLine(item.value);
+            }
 
 
 

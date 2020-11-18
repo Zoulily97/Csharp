@@ -1,24 +1,92 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Csharp.其他
 {
     //用泛型改造二分查找、堆栈和双向链表
-    public class DoubleLinked<T>: IEnumerable
+    public class DoubleLinked<T>
     {
         public T value;
 
         public DoubleLinked<T> Next { get; set; }
         public DoubleLinked<T> Previous { get; set; }
 
-        public T Content { get; set; }
+         
+        public IEnumerable<DoubleLinked<T>> CurentNode { get; set; }
 
 
 
-        public IEnumerator GetEnumerator()
+        //public IEnumerator GetEnumerator()
+        //{
+        //    return new NodeIEnumerator();
+        //}
+          
+        public class NodeIEnumerator:IEnumerator
         {
-            throw new System.NotImplementedException();
+
+            //当前位置的元素
+            DoubleLinked<T> Current { get; }
+
+            public T CurrentValue => Current.value;
+
+            object IEnumerator.Current => throw new NotImplementedException();
+
+            public NodeIEnumerator(DoubleLinked<T> node)
+            {
+                Current = node;
+            }
+
+            public NodeIEnumerator()
+            {
+            }
+
+            public IEnumerator GetEnumerator()
+            {
+                return new NodeIEnumerator();
+            }
+
+            public void Reset()
+            {
+                throw new NotImplementedException();
+            }
+
+         
+
+            bool IEnumerator.MoveNext()
+            {
+                if (Current != null)
+                    return true;
+                return false;
+            }
         }
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //在节点后插入节点node
         public void AddAfter(DoubleLinked<T> node)
@@ -69,20 +137,7 @@ namespace Csharp.其他
 
 
 
-            //if (this.Previous != null && this.Next != null)
-            //{
-            //    this.Previous.Next = this;
-            //    this.Next.Previous = this;
-            //}
-            //else if (this.Previous == null)
-            //{
-            //   Next= Previous = null;
-            //}
-            //else
-            //{
-            //    Next = Previous = null;
-            //}
-
+            
 
 
 
